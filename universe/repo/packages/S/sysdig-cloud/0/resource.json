@@ -1,1 +1,0 @@
-{"images": {"icon-large": "http://download.draios.com/mesos-universe-icons/x256.png", "icon-small": "http://download.draios.com/mesos-universe-icons/x48.png", "icon-medium": "http://download.draios.com/mesos-universe-icons/x96.png"}, "assets": {"container": {"docker": {"agent": "sysdig/agent:latest"}}}}

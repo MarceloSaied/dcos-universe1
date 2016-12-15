@@ -1,0 +1,78 @@
+{
+  "id": "{{service.framework-name}}",
+  "cpus": {{service.cpu}},
+  "mem": {{service.ram}},
+  "ports": [0],
+  "instances": {{service.instances}},
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 120,
+      "intervalSeconds": 30,
+      "maxConsecutiveFailures": 0,
+      "path": "/",
+      "portIndex": 0,
+      "protocol": "HTTP",
+      "timeoutSeconds": 5
+    }
+  ],
+  "args": [
+    "--frameworkName", "{{service.framework-name}}",
+    "--frameworkFailoverTimeout", "{{service.framework-failover-timeout}}",
+    "--zookeeperMesosUrl", "{{service.zookeeper-mesos-url}}",
+    "--zookeeperMesosTimeout", "{{service.zookeeper-mesos-timeout}}",
+    "--webUiPort", "{{service.web-ui-port}}",
+  {{#service.external-volume.enable}}
+    "--externalVolumeDriver", "{{service.external-volume.externalVolumeDriver}}",
+    "--externalVolumeOptions", "{{service.external-volume.externalVolumeOptions}}",
+  {{/service.external-volume.enable}}
+   "--useIpAddress", "{{service.use-ip-address}}",
+  {{#service.framework-principal.enable}}
+    "--frameworkPrincipal", "{{service.framework-principal.framework-principal}}",
+    "--frameworkSecretPath", "{{service.framework-principal.framework-secret-path}}",
+  {{/service.framework-principal.enable}}
+  {{#elasticsearch.executor.enable-settings-location}}
+    "--elasticsearchSettingsLocation", "{{elasticsearch.executor.settings-location}}",
+  {{/elasticsearch.executor.enable-settings-location}}
+    "--elasticsearchClusterName", "{{elasticsearch.elasticsearch-cluster-name}}",
+    "--executorName", "{{elasticsearch.executor-name}}",
+    "--elasticsearchNodes", "{{elasticsearch.elasticsearch-nodes}}",
+    "--elasticsearchCpu", "{{elasticsearch.elasticsearch-cpu}}",
+    "--elasticsearchDisk", "{{elasticsearch.elasticsearch-disk}}",
+    "--elasticsearchRam", "{{elasticsearch.elasticsearch-ram}}",
+    "--executorNetworkPublishHost", "{{elasticsearch.executor-network-publish-host}}",
+  {{#elasticsearch.framework-use-docker}}
+    "--elasticsearchDockerImage", "{{elasticsearch.docker-settings.elasticsearch-docker-image}}",
+    "--executorForcePullImage", "{{elasticsearch.docker-settings.force-pull-image}}",
+    "--dataDir", "{{elasticsearch.docker-settings.datadir}}"
+  {{/elasticsearch.framework-use-docker}}
+  {{^elasticsearch.framework-use-docker}}
+    "--elasticsearchBinaryUrl", "{{elasticsearch.jar-settings.elasticsearch-binary-url}}",
+    "--javaHome", "{{elasticsearch.java-home}}"
+  {{/elasticsearch.framework-use-docker}}
+  ],
+  "env": {
+    "JAVA_OPTS": "{{service.java-heap}}"
+  },
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "{{resource.assets.container.docker.elasticsearch-scheduler}}",
+      "network": "HOST",
+      "forcePullImage": {{service.force-pull-image}}
+    }
+  {{#service.framework-principal.enable}}    
+    ,"volumes": [
+      {
+        "containerPath": "{{service.framework-principal.framework-secret-path}} ",
+        "hostPath": "{{service.framework-principal.framework-secret-path}}",
+        "mode": "RO"
+      }
+    ]
+  {{/service.framework-principal.enable}}
+  },
+  "ports": [{{service.web-ui-port}}],
+  "requirePorts": true,
+  "labels": {
+    "DCOS_PACKAGE_FRAMEWORK_NAME": "{{service.framework-name}}"
+  }
+}
