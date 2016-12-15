@@ -1,0 +1,1 @@
+{"description": "Hue Web Interface to Hadoop", "maintainer": "support@mesosphere.io", "framework": false, "tags": ["hadoop", "filesystem", "hdfs"], "version": "0.0.1", "packagingVersion": "2.0", "scm": "https://github.com/mesosphere/hue.git", "name": "hue"}

@@ -1,0 +1,1 @@
+{"images": {"icon-large": "https://apk-dl.com/detail/image/com.microsoft.operations.AndroidPhone-w70.png", "icon-small": "https://apk-dl.com/detail/image/com.microsoft.operations.AndroidPhone-w70.png", "icon-medium": "https://apk-dl.com/detail/image/com.microsoft.operations.AndroidPhone-w70.png"}, "assets": {"container": {"docker": {"image": "microsoft/oms:universe"}}}}

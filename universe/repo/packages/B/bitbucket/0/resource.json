@@ -1,0 +1,1 @@
+{"images": {"icon-large": "http://i.imgur.com/QGc420u.png", "icon-small": "http://i.imgur.com/QGc420u.png", "icon-medium": "http://i.imgur.com/QGc420u.png"}, "assets": {"container": {"docker": {"bitbucket-docker": "atlassian/bitbucket-server:4.5"}}}}

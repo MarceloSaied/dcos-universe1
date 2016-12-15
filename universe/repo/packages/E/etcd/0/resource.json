@@ -1,0 +1,1 @@
+{"images": {"icon-large": "https://downloads.mesosphere.com/universe/assets/icon-service-etcd-large.png", "icon-small": "https://downloads.mesosphere.com/universe/assets/icon-service-etcd-small.png", "icon-medium": "https://downloads.mesosphere.com/universe/assets/icon-service-etcd-medium.png"}, "assets": {"container": {"docker": {"etcd-docker": "mesosphere/etcd-mesos:0.1.2"}}}}
